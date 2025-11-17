@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Entry Form</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background: #f2f2f2; 
+            padding: 20px; 
+        }
+        .form-container {
+            background: #ffffff;
+            padding: 20px;
+            width: 480px;
+            max-width: 95%;
+            margin: 24px auto;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+            border-radius: 8px;
+        }
+        h2 { margin-top: 0; }
+        form {
+            display: block;
+        }
+        .form-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 8px 0;
+        }
+        .form-row label {
+            width: 36%;
+            font-size: 14px;
+            color: #333;
+        }
+        .form-row input, .form-row select, .form-row textarea {
+            flex: 1;
+            padding: 8px 10px;
+            border: 1px solid #dcdcdc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .marks-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 8px 0 16px 0;
+        }
+        .marks-grid .form-row { display: block; }
+        .marks-grid label { width: 100%; margin-bottom: 6px; }
+        .full-width { width: 100%; }
+        .hint { font-size: 12px; color: #666; margin-top: 4px; }
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 12px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+        button:hover { background: #0056b3; }
+        @media (max-width: 420px) {
+            .form-row { flex-direction: column; align-items: stretch; }
+            .form-row label { width: 100%; }
+            .marks-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Data Entry Form</h2>
+
+    <form method="POST">
+        <div class="form-row">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" placeholder="Enter full name" required>
+        </div>
+
+        <div class="form-row">
+            <label for="emp_id">Emp ID</label>
+            <input id="emp_id" name="emp_id" type="text" placeholder="e.g. EMP12345" required>
+        </div>
+
+        <div class="form-row">
+            <label for="topics">Topics</label>
+            <input id="topics" name="topics" type="text" placeholder="Comma-separated topics" class="full-width">
+        </div>
+
+        <div class="marks-grid">
+            <div class="form-row">
+                <label for="marks_clarity">Marks (Clarity)</label>
+                <input id="marks_clarity" name="marks_clarity" type="number" min="0" max="100" step="1" placeholder="0-100" required>
+            </div>
+            <div class="form-row">
+                <label for="marks_structure">Marks (Structure)</label>
+                <input id="marks_structure" name="marks_structure" type="number" min="0" max="100" step="1" placeholder="0-100" required>
+            </div>
+            <div class="form-row">
+                <label for="marks_engagement">Marks (Engagement)</label>
+                <input id="marks_engagement" name="marks_engagement" type="number" min="0" max="100" step="1" placeholder="0-100" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <label for="datetime">Date & Time</label>
+            <input id="datetime" name="datetime" type="datetime-local" required>
+        </div>
+
+        <div class="hint">All marks should be numbers between 0 and 100.</div>
+
+        <button type="submit">Save to Excel</button>
+    </form>
+</div>
+
+</body>
+</html>
