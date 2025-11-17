@@ -59,9 +59,18 @@ def form():
     return render_template("form.html")
 
 if __name__ == "__main__":
+    # Bind to PORT environment variable (used by hosts like Render)
     port = int(os.environ.get("PORT", 5000))
-    host = os.environ.get("HOST", "0.0.0.0")
-    # Allow enabling debug via FLASK_DEBUG env var (optional)
+    # If running on a hosting platform that provides PORT (e.g. Render),
+    # force binding to 0.0.0.0 and disable the Werkzeug reloader so the
+    # process listens on all interfaces and the host can detect the port.
+    is_hosted = "PORT" in os.environ
+    host = os.environ.get("HOST", "0.0.0.0") if not is_hosted else "0.0.0.0"
+    # Allow enabling debug via FLASK_DEBUG env var, but avoid the reloader on hosts
     debug = os.environ.get("FLASK_DEBUG", "false").lower() in ("1", "true", "yes")
-    app.run(host=host, port=port, debug=debug)
+    if is_hosted:
+        app.run(host=host, port=port, debug=debug, use_reloader=False)
+    else:
+        app.run(host=host, port=port, debug=debug)
+
 
