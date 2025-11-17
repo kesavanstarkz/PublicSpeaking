@@ -58,6 +58,14 @@ def form():
 
     return render_template("form.html")
 
+
+from flask import send_file
+
+@app.route("/download")
+def download():
+    return send_file("data.xlsx", as_attachment=True)
+
+
 if __name__ == "__main__":
     # Bind to PORT environment variable (used by hosts like Render)
     port = int(os.environ.get("PORT", 5000))
@@ -72,5 +80,6 @@ if __name__ == "__main__":
         app.run(host=host, port=port, debug=debug, use_reloader=False)
     else:
         app.run(host=host, port=port, debug=debug)
+
 
 
