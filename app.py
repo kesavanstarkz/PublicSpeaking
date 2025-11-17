@@ -11,7 +11,7 @@ if not os.path.exists(FILE_NAME):
     ws = wb.active
     ws.append([
         "Name",
-        "Emp ID",
+        "Marks Given By",
         "Topics",
         "Marks (Clarity)",
         "Marks (Structure)",
@@ -25,7 +25,7 @@ def form():
     if request.method == "POST":
         # Use .get() to avoid BadRequestKeyError when keys are missing
         name = request.form.get("name", "").strip()
-        emp_id = request.form.get("emp_id", "").strip()
+        emp_id = request.form.get("marks_given_by", "").strip()
         topics = request.form.get("topics", "").strip()
 
         def safe_int(val):
@@ -80,6 +80,7 @@ if __name__ == "__main__":
         app.run(host=host, port=port, debug=debug, use_reloader=False)
     else:
         app.run(host=host, port=port, debug=debug)
+
 
 
 
